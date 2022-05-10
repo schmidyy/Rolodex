@@ -7,23 +7,11 @@
 
 import UIKit
 
-enum TableViewState<T: Decodable & Equatable, E: Error & Equatable>: Equatable {
-	case loading
-	case loaded([T])
-	case error(E)
-	
-	var numberOfRows: Int {
-		guard case let .loaded(data) = self else {
-			return 0
-		}
-		return data.count
-	}
-}
-
 class EmployeeListViewController: UITableViewController {
+	// MARK: Properties
 	typealias State = TableViewState<Employee, EmployeeApiClient.RequestError>
 	
-	var state: State = .loading {
+	private var state: State = .loading {
 		didSet {
 			guard oldValue != state else { return }
 			render()
@@ -39,35 +27,55 @@ class EmployeeListViewController: UITableViewController {
 		return hud
 	}()
 	
+	private var emptyState: EmptyStateView?
+	
+	// MARK: Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		title = "Rolodex"
 		navigationController?.navigationBar.prefersLargeTitles = true
 		
+		tableView.register(UITableViewCell.self, forCellReuseIdentifier: "employee.cell")
 		render()
 	}
 	
+	// MARK: Loading and rendering
 	private func loadEmployeeList() {
-		
+		EmployeeApiClient.fetch(endpoint: .production) { [weak self] result in
+			switch result {
+			case .success(let root):
+				DispatchQueue.main.async {
+					self?.state = .loaded(root.employees)
+				}
+			case .failure(let error):
+				DispatchQueue.main.async {
+					self?.state = .error(error)
+				}
+			}
+		}
 	}
 	
 	private func render() {
-		view.removeAllSubviews()
+		removeSubviewsIfNeeded()
 		
 		switch state {
 		case .loading:
 			showLoadingIndicator()
 			loadEmployeeList()
-			
 		case .loaded(let data):
+			loadingIndicator.stopAnimating()
+			
 			guard data.isEmpty == false else {
-				showEmptyState(.noData(ressourceName: "employees"))
+				DispatchQueue.main.async {
+					self.showEmptyState(.noData(ressourceName: "employees"))
+				}
 				return
 			}
 			
-			tableView.reloadData()
-			
+			DispatchQueue.main.async {
+				self.tableView.reloadData()
+			}
 		case .error(let error):
 			let status: EmptyStateView.Status
 			switch error {
@@ -94,15 +102,45 @@ class EmployeeListViewController: UITableViewController {
 	}
 	
 	private func showEmptyState(_ status: EmptyStateView.Status) {
-		let emptyState = EmptyStateView(status: status) { [weak self] in
+		emptyState = EmptyStateView(status: status) { [weak self] in
 			self?.state = .loading
 		}
 		
-		view.addSubview(emptyState)
+		view.addSubview(emptyState!)
 		NSLayoutConstraint.activate([
-			emptyState.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-			emptyState.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+			emptyState!.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+			emptyState!.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
 		])
+	}
+	
+	private func removeSubviewsIfNeeded() {
+		if case .loaded(let data) = state, data.isEmpty == false {
+			return
+		}
+		
+		loadingIndicator.removeFromSuperview()
+		emptyState?.removeFromSuperview()
+	}
+	
+	// MARK: UITableViewDelegate
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		state.numberOfRows
+	}
+
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "employee.cell", for: indexPath)
+		let employee = state.data[indexPath.row]
+
+		var config = cell.defaultContentConfiguration()
+		config.text = employee.fullName
+		config.secondaryText = employee.biography
+		cell.contentConfiguration = config
+
+		return cell
+	}
+
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 	}
 }
 
