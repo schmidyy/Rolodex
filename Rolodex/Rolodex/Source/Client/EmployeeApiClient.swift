@@ -31,11 +31,11 @@ enum EmployeeApiClient {
 		}
 	}
 	
-	enum RequestError: Error {
+	enum RequestError: Error, Equatable {
 		case invalidUrl
-		case networkError(Error)
+		case networkError
 		case missingData
-		case decodingError(Error)
+		case decodingError
 	}
 	
 	static func fetch(endpoint: Endpoint = .production, completion: @escaping (Result<Employees, RequestError>) -> Void) {
@@ -45,8 +45,8 @@ enum EmployeeApiClient {
 		}
 		
 		let task = URLSession.shared.dataTask(with: url) { data, _, possibleError in
-			if let error = possibleError {
-				completion(.failure(.networkError(error)))
+			if possibleError != nil {
+				completion(.failure(.networkError))
 				return
 			}
 			
@@ -62,7 +62,7 @@ enum EmployeeApiClient {
 				let employees = try decoder.decode(Employees.self, from: data)
 				completion(.success(employees))
 			} catch {
-				completion(.failure(.decodingError(error)))
+				completion(.failure(.decodingError))
 			}
 		}
 		

@@ -11,7 +11,7 @@ struct Employees: Decodable {
 	let employees: [Employee]
 }
 
-struct Employee: Decodable {
+struct Employee: Decodable, Equatable {
 	enum EmployeeType: String, Decodable {
 		case fullTime = "FULL_TIME"
 		case partTyime = "PART_TIME"
