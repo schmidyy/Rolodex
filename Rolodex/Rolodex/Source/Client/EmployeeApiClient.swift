@@ -8,7 +8,7 @@
 import Foundation
 
 enum EmployeeApiClient {
-	enum Endpoint {
+	enum Endpoint: String {
 		private static let base = "https://s3.amazonaws.com/sq-mobile-interview/"
 		
 		case production
@@ -45,7 +45,8 @@ enum EmployeeApiClient {
 		}
 		
 		let task = URLSession.shared.dataTask(with: url) { data, _, possibleError in
-			if possibleError != nil {
+			if let error = possibleError {
+				print("Error received when fetching \(endpoint.rawValue) endpoint: \(error.localizedDescription)")
 				completion(.failure(.networkError))
 				return
 			}
@@ -62,6 +63,7 @@ enum EmployeeApiClient {
 				let employees = try decoder.decode(Employees.self, from: data)
 				completion(.success(employees))
 			} catch {
+				print("Could not decode object from \(endpoint.rawValue) endpoint: \(error.localizedDescription)")
 				completion(.failure(.decodingError))
 			}
 		}

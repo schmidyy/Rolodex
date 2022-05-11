@@ -8,11 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		491A861D2829C65F003CCD6B /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491A861C2829C65F003CCD6B /* Employee.swift */; };
-		491A861F2829C9A2003CCD6B /* Fetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491A861E2829C9A2003CCD6B /* Fetchable.swift */; };
 		491A86242829FEA2003CCD6B /* EmployeeApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491A86232829FEA2003CCD6B /* EmployeeApiClient.swift */; };
 		491A862A282AC09F003CCD6B /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491A8629282AC09F003CCD6B /* EmptyStateView.swift */; };
-		491A862C282B0467003CCD6B /* Views+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491A862B282B0467003CCD6B /* Views+Extensions.swift */; };
 		491A862E282B272F003CCD6B /* TableViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491A862D282B272F003CCD6B /* TableViewState.swift */; };
+		491A8630282B3796003CCD6B /* EmployeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491A862F282B3796003CCD6B /* EmployeeCell.swift */; };
 		49483FC728298E0B000B7C87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49483FC628298E0B000B7C87 /* AppDelegate.swift */; };
 		49483FC928298E0B000B7C87 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49483FC828298E0B000B7C87 /* SceneDelegate.swift */; };
 		49483FCB28298E0B000B7C87 /* EmployeeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49483FCA28298E0B000B7C87 /* EmployeeListViewController.swift */; };
@@ -21,6 +20,8 @@
 		49483FDE28298E0C000B7C87 /* RolodexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49483FDD28298E0C000B7C87 /* RolodexTests.swift */; };
 		49483FE828298E0C000B7C87 /* RolodexUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49483FE728298E0C000B7C87 /* RolodexUITests.swift */; };
 		49483FEA28298E0C000B7C87 /* RolodexUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49483FE928298E0C000B7C87 /* RolodexUITestsLaunchTests.swift */; };
+		4949AB09282C344400A0765B /* UseAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4949AB08282C344400A0765B /* UseAutoLayout.swift */; };
+		4949AB0B282C3F5700A0765B /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4949AB0A282C3F5700A0765B /* Badge.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,11 +43,10 @@
 
 /* Begin PBXFileReference section */
 		491A861C2829C65F003CCD6B /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
-		491A861E2829C9A2003CCD6B /* Fetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetchable.swift; sourceTree = "<group>"; };
 		491A86232829FEA2003CCD6B /* EmployeeApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeApiClient.swift; sourceTree = "<group>"; };
 		491A8629282AC09F003CCD6B /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
-		491A862B282B0467003CCD6B /* Views+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views+Extensions.swift"; sourceTree = "<group>"; };
 		491A862D282B272F003CCD6B /* TableViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewState.swift; sourceTree = "<group>"; };
+		491A862F282B3796003CCD6B /* EmployeeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeCell.swift; sourceTree = "<group>"; };
 		49483FC328298E0B000B7C87 /* Rolodex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rolodex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49483FC628298E0B000B7C87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49483FC828298E0B000B7C87 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +59,8 @@
 		49483FE328298E0C000B7C87 /* RolodexUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RolodexUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49483FE728298E0C000B7C87 /* RolodexUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolodexUITests.swift; sourceTree = "<group>"; };
 		49483FE928298E0C000B7C87 /* RolodexUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolodexUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4949AB08282C344400A0765B /* UseAutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseAutoLayout.swift; sourceTree = "<group>"; };
+		4949AB0A282C3F5700A0765B /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,8 +109,8 @@
 		491A86192829C5C5003CCD6B /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				491A8628282AC093003CCD6B /* Views */,
 				491A861A2829C634003CCD6B /* Controllers */,
+				491A8628282AC093003CCD6B /* Views */,
 				491A861B2829C64A003CCD6B /* Models */,
 				491A86222829FE25003CCD6B /* Client */,
 			);
@@ -127,7 +129,6 @@
 		491A861B2829C64A003CCD6B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				491A861E2829C9A2003CCD6B /* Fetchable.swift */,
 				491A861C2829C65F003CCD6B /* Employee.swift */,
 			);
 			path = Models;
@@ -144,8 +145,10 @@
 		491A8628282AC093003CCD6B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				491A862F282B3796003CCD6B /* EmployeeCell.swift */,
 				491A8629282AC09F003CCD6B /* EmptyStateView.swift */,
-				491A862B282B0467003CCD6B /* Views+Extensions.swift */,
+				4949AB0A282C3F5700A0765B /* Badge.swift */,
+				4949AB0C282C40A300A0765B /* Helpers */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -196,6 +199,14 @@
 				49483FE928298E0C000B7C87 /* RolodexUITestsLaunchTests.swift */,
 			);
 			path = RolodexUITests;
+			sourceTree = "<group>";
+		};
+		4949AB0C282C40A300A0765B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4949AB08282C344400A0765B /* UseAutoLayout.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,14 +340,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				49483FCB28298E0B000B7C87 /* EmployeeListViewController.swift in Sources */,
+				4949AB0B282C3F5700A0765B /* Badge.swift in Sources */,
 				491A86242829FEA2003CCD6B /* EmployeeApiClient.swift in Sources */,
 				491A862E282B272F003CCD6B /* TableViewState.swift in Sources */,
-				491A862C282B0467003CCD6B /* Views+Extensions.swift in Sources */,
 				491A861D2829C65F003CCD6B /* Employee.swift in Sources */,
+				4949AB09282C344400A0765B /* UseAutoLayout.swift in Sources */,
 				49483FC728298E0B000B7C87 /* AppDelegate.swift in Sources */,
-				491A861F2829C9A2003CCD6B /* Fetchable.swift in Sources */,
 				49483FC928298E0B000B7C87 /* SceneDelegate.swift in Sources */,
 				491A862A282AC09F003CCD6B /* EmptyStateView.swift in Sources */,
+				491A8630282B3796003CCD6B /* EmployeeCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

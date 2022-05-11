@@ -45,26 +45,3 @@ struct Employee: Decodable, Equatable {
 	/// How the employee is classified.
 	let employeeType: EmployeeType
 }
-
-//extension Employee: Fetchable {
-//	static var endpointPath: String = "employees"
-//
-//	/// Convert keys from snake case to camel case
-//	static var jsonDecoder: JSONDecoder = {
-//		let decoder = JSONDecoder()
-//		decoder.keyDecodingStrategy = .convertFromSnakeCase
-//		return decoder
-//	}()
-//}
-
-//	enum CodingKeys: String, CodingKey, Decodable {
-//		case id = "uuid"
-//		case fullName = "full_name"
-//		case phoneNumer = "phone_number"
-//		case email = "email_address"
-//		case biography
-//		case iconSmall = "photo_url_small"
-//		case iconLarge = "photo_url_large"
-//		case team
-//		case contractType = "employee_type"
-//	}

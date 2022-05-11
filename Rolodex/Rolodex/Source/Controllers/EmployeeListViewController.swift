@@ -11,10 +11,18 @@ class EmployeeListViewController: UITableViewController {
 	// MARK: Properties
 	typealias State = TableViewState<Employee, EmployeeApiClient.RequestError>
 	
+	private static var placeholderAvatar: UIImage? = {
+		let config = UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .title1))
+		let image = UIImage(systemName: "person.circle.fill", withConfiguration: config)
+		return image
+	}()
+	
 	private var state: State = .loading {
 		didSet {
 			guard oldValue != state else { return }
-			render()
+			DispatchQueue.main.async {
+				self.render()
+			}
 		}
 	}
 	
@@ -36,26 +44,23 @@ class EmployeeListViewController: UITableViewController {
 		title = "Rolodex"
 		navigationController?.navigationBar.prefersLargeTitles = true
 		
-		tableView.register(UITableViewCell.self, forCellReuseIdentifier: "employee.cell")
+		tableView.register(EmployeeCell.self, forCellReuseIdentifier: "employee.cell")
 		render()
 	}
 	
 	// MARK: Loading and rendering
 	private func loadEmployeeList() {
-		EmployeeApiClient.fetch(endpoint: .production) { [weak self] result in
+		EmployeeApiClient.fetch { [weak self] result in
 			switch result {
 			case .success(let root):
-				DispatchQueue.main.async {
-					self?.state = .loaded(root.employees)
-				}
+				self?.state = .loaded(root.employees)
 			case .failure(let error):
-				DispatchQueue.main.async {
-					self?.state = .error(error)
-				}
+				self?.state = .error(error)
 			}
 		}
 	}
 	
+	/// Renders the screen according to the `state`.
 	private func render() {
 		removeSubviewsIfNeeded()
 		
@@ -67,15 +72,11 @@ class EmployeeListViewController: UITableViewController {
 			loadingIndicator.stopAnimating()
 			
 			guard data.isEmpty == false else {
-				DispatchQueue.main.async {
-					self.showEmptyState(.noData(ressourceName: "employees"))
-				}
+				showEmptyState(.noData(ressourceName: "employees"))
 				return
 			}
 			
-			DispatchQueue.main.async {
-				self.tableView.reloadData()
-			}
+			tableView.reloadData()
 		case .error(let error):
 			let status: EmptyStateView.Status
 			switch error {
@@ -121,21 +122,21 @@ class EmployeeListViewController: UITableViewController {
 		loadingIndicator.removeFromSuperview()
 		emptyState?.removeFromSuperview()
 	}
-	
-	// MARK: UITableViewDelegate
+}
+
+// MARK: UITableViewDelegate
+extension EmployeeListViewController {
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		state.numberOfRows
+		return state.numberOfRows
 	}
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "employee.cell", for: indexPath)
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: "employee.cell", for: indexPath) as? EmployeeCell else {
+			return UITableViewCell()
+		}
+		
 		let employee = state.data[indexPath.row]
-
-		var config = cell.defaultContentConfiguration()
-		config.text = employee.fullName
-		config.secondaryText = employee.biography
-		cell.contentConfiguration = config
-
+		cell.configure(with: employee)
 		return cell
 	}
 
@@ -143,4 +144,3 @@ class EmployeeListViewController: UITableViewController {
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
 }
-
