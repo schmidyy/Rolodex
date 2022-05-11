@@ -11,20 +11,17 @@ class EmployeeListViewController: UITableViewController {
 	// MARK: Properties
 	typealias State = TableViewState<Employee, EmployeeApiClient.RequestError>
 	
-	private static var placeholderAvatar: UIImage? = {
-		let config = UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .title1))
-		let image = UIImage(systemName: "person.circle.fill", withConfiguration: config)
-		return image
-	}()
-	
 	private var state: State = .loading {
 		didSet {
 			guard oldValue != state else { return }
 			DispatchQueue.main.async {
+				self.addRefreshControlIfNeeded()
 				self.render()
 			}
 		}
 	}
+	
+	private var endpoint: EmployeeApiClient.Endpoint = .production
 	
 	private lazy var loadingIndicator: UIActivityIndicatorView = {
 		let hud = UIActivityIndicatorView()
@@ -35,6 +32,7 @@ class EmployeeListViewController: UITableViewController {
 		return hud
 	}()
 	
+	private lazy var refresh = UIRefreshControl()
 	private var emptyState: EmptyStateView?
 	
 	// MARK: Lifecycle
@@ -45,12 +43,33 @@ class EmployeeListViewController: UITableViewController {
 		navigationController?.navigationBar.prefersLargeTitles = true
 		
 		tableView.register(EmployeeCell.self, forCellReuseIdentifier: "employee.cell")
+		
 		render()
 	}
 	
 	// MARK: Loading and rendering
+	private func addRefreshControlIfNeeded() {
+		switch state {
+		case .loaded:
+			guard tableView.refreshControl == nil else { return }
+			refresh.endRefreshing()
+			refresh.addAction(UIAction(handler: { [weak self] _ in
+				self?.state = .loading
+			}), for: .valueChanged)
+			tableView.refreshControl = refresh
+		case .error:
+			refresh.endRefreshing()
+		case .loading:
+			break
+		}
+	}
+	
 	private func loadEmployeeList() {
-		EmployeeApiClient.fetch { [weak self] result in
+		EmployeeApiClient.fetch(endpoint: endpoint) { [weak self, weak refresh] result in
+			DispatchQueue.main.async {
+				refresh?.endRefreshing()
+			}
+			
 			switch result {
 			case .success(let root):
 				self?.state = .loaded(root.employees)
@@ -71,12 +90,9 @@ class EmployeeListViewController: UITableViewController {
 		case .loaded(let data):
 			loadingIndicator.stopAnimating()
 			
-			guard data.isEmpty == false else {
+			if data.isEmpty {
 				showEmptyState(.noData(ressourceName: "employees"))
-				return
 			}
-			
-			tableView.reloadData()
 		case .error(let error):
 			let status: EmptyStateView.Status
 			switch error {
@@ -90,6 +106,8 @@ class EmployeeListViewController: UITableViewController {
 			
 			showEmptyState(status)
 		}
+		
+		tableView.reloadData()
 	}
 	
 	private func showLoadingIndicator() {

@@ -147,7 +147,7 @@
 			children = (
 				491A862F282B3796003CCD6B /* EmployeeCell.swift */,
 				491A8629282AC09F003CCD6B /* EmptyStateView.swift */,
-				4949AB0A282C3F5700A0765B /* Badge.swift */,
+				4949AB0D282C4DF000A0765B /* Components */,
 				4949AB0C282C40A300A0765B /* Helpers */,
 			);
 			path = Views;
@@ -207,6 +207,14 @@
 				4949AB08282C344400A0765B /* UseAutoLayout.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		4949AB0D282C4DF000A0765B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				4949AB0A282C3F5700A0765B /* Badge.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
