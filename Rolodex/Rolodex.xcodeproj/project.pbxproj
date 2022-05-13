@@ -17,7 +17,6 @@
 		49483FCB28298E0B000B7C87 /* EmployeeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49483FCA28298E0B000B7C87 /* EmployeeListViewController.swift */; };
 		49483FD028298E0C000B7C87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49483FCF28298E0C000B7C87 /* Assets.xcassets */; };
 		49483FD328298E0C000B7C87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49483FD128298E0C000B7C87 /* LaunchScreen.storyboard */; };
-		49483FDE28298E0C000B7C87 /* RolodexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49483FDD28298E0C000B7C87 /* RolodexTests.swift */; };
 		49483FE828298E0C000B7C87 /* RolodexUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49483FE728298E0C000B7C87 /* RolodexUITests.swift */; };
 		49483FEA28298E0C000B7C87 /* RolodexUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49483FE928298E0C000B7C87 /* RolodexUITestsLaunchTests.swift */; };
 		4949AB09282C344400A0765B /* UseAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4949AB08282C344400A0765B /* UseAutoLayout.swift */; };
@@ -25,6 +24,9 @@
 		4949AB10282C6AE800A0765B /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 4949AB0F282C6AE800A0765B /* AlamofireImage */; };
 		4949AB16282CA6B500A0765B /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4949AB15282CA6B500A0765B /* Team.swift */; };
 		4949AB1B282DEC7C00A0765B /* EmployeeListSortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4949AB1A282DEC7C00A0765B /* EmployeeListSortType.swift */; };
+		4949AB1E282DEDA400A0765B /* EmployeeApiClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4949AB1D282DEDA400A0765B /* EmployeeApiClientTests.swift */; };
+		4949AB20282DEE5900A0765B /* EmployeeListSortTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4949AB1F282DEE5900A0765B /* EmployeeListSortTypeTests.swift */; };
+		4949AB22282DF1D800A0765B /* TableViewStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4949AB21282DF1D800A0765B /* TableViewStateTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +60,6 @@
 		49483FD228298E0C000B7C87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49483FD428298E0C000B7C87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49483FD928298E0C000B7C87 /* RolodexTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RolodexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		49483FDD28298E0C000B7C87 /* RolodexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolodexTests.swift; sourceTree = "<group>"; };
 		49483FE328298E0C000B7C87 /* RolodexUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RolodexUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49483FE728298E0C000B7C87 /* RolodexUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolodexUITests.swift; sourceTree = "<group>"; };
 		49483FE928298E0C000B7C87 /* RolodexUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolodexUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -66,6 +67,9 @@
 		4949AB0A282C3F5700A0765B /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		4949AB15282CA6B500A0765B /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		4949AB1A282DEC7C00A0765B /* EmployeeListSortType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListSortType.swift; sourceTree = "<group>"; };
+		4949AB1D282DEDA400A0765B /* EmployeeApiClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeApiClientTests.swift; sourceTree = "<group>"; };
+		4949AB1F282DEE5900A0765B /* EmployeeListSortTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListSortTypeTests.swift; sourceTree = "<group>"; };
+		4949AB21282DF1D800A0765B /* TableViewStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewStateTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,7 +198,9 @@
 		49483FDC28298E0C000B7C87 /* RolodexTests */ = {
 			isa = PBXGroup;
 			children = (
-				49483FDD28298E0C000B7C87 /* RolodexTests.swift */,
+				4949AB1D282DEDA400A0765B /* EmployeeApiClientTests.swift */,
+				4949AB1F282DEE5900A0765B /* EmployeeListSortTypeTests.swift */,
+				4949AB21282DF1D800A0765B /* TableViewStateTests.swift */,
 			);
 			path = RolodexTests;
 			sourceTree = "<group>";
@@ -396,7 +402,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49483FDE28298E0C000B7C87 /* RolodexTests.swift in Sources */,
+				4949AB22282DF1D800A0765B /* TableViewStateTests.swift in Sources */,
+				4949AB1E282DEDA400A0765B /* EmployeeApiClientTests.swift in Sources */,
+				4949AB20282DEE5900A0765B /* EmployeeListSortTypeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
