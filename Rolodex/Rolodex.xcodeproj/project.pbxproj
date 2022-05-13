@@ -22,6 +22,9 @@
 		49483FEA28298E0C000B7C87 /* RolodexUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49483FE928298E0C000B7C87 /* RolodexUITestsLaunchTests.swift */; };
 		4949AB09282C344400A0765B /* UseAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4949AB08282C344400A0765B /* UseAutoLayout.swift */; };
 		4949AB0B282C3F5700A0765B /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4949AB0A282C3F5700A0765B /* Badge.swift */; };
+		4949AB10282C6AE800A0765B /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 4949AB0F282C6AE800A0765B /* AlamofireImage */; };
+		4949AB16282CA6B500A0765B /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4949AB15282CA6B500A0765B /* Team.swift */; };
+		4949AB1B282DEC7C00A0765B /* EmployeeListSortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4949AB1A282DEC7C00A0765B /* EmployeeListSortType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,8 @@
 		49483FE928298E0C000B7C87 /* RolodexUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolodexUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4949AB08282C344400A0765B /* UseAutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseAutoLayout.swift; sourceTree = "<group>"; };
 		4949AB0A282C3F5700A0765B /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
+		4949AB15282CA6B500A0765B /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		4949AB1A282DEC7C00A0765B /* EmployeeListSortType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListSortType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4949AB10282C6AE800A0765B /* AlamofireImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				491A861A2829C634003CCD6B /* Controllers */,
+				4949AB19282DEC3200A0765B /* ViewState */,
 				491A8628282AC093003CCD6B /* Views */,
 				491A861B2829C64A003CCD6B /* Models */,
 				491A86222829FE25003CCD6B /* Client */,
@@ -120,8 +127,7 @@
 		491A861A2829C634003CCD6B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				491A862D282B272F003CCD6B /* TableViewState.swift */,
-				49483FCA28298E0B000B7C87 /* EmployeeListViewController.swift */,
+				4949AB1C282DEC9900A0765B /* EmployeeList */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -130,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				491A861C2829C65F003CCD6B /* Employee.swift */,
+				4949AB15282CA6B500A0765B /* Team.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -217,6 +224,23 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		4949AB19282DEC3200A0765B /* ViewState */ = {
+			isa = PBXGroup;
+			children = (
+				491A862D282B272F003CCD6B /* TableViewState.swift */,
+			);
+			path = ViewState;
+			sourceTree = "<group>";
+		};
+		4949AB1C282DEC9900A0765B /* EmployeeList */ = {
+			isa = PBXGroup;
+			children = (
+				49483FCA28298E0B000B7C87 /* EmployeeListViewController.swift */,
+				4949AB1A282DEC7C00A0765B /* EmployeeListSortType.swift */,
+			);
+			path = EmployeeList;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -233,6 +257,9 @@
 			dependencies = (
 			);
 			name = Rolodex;
+			packageProductDependencies = (
+				4949AB0F282C6AE800A0765B /* AlamofireImage */,
+			);
 			productName = Rolodex;
 			productReference = 49483FC328298E0B000B7C87 /* Rolodex.app */;
 			productType = "com.apple.product-type.application";
@@ -305,6 +332,9 @@
 				Base,
 			);
 			mainGroup = 49483FBA28298E0B000B7C87;
+			packageReferences = (
+				4949AB0E282C6AE800A0765B /* XCRemoteSwiftPackageReference "AlamofireImage" */,
+			);
 			productRefGroup = 49483FC428298E0B000B7C87 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -347,10 +377,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4949AB16282CA6B500A0765B /* Team.swift in Sources */,
 				49483FCB28298E0B000B7C87 /* EmployeeListViewController.swift in Sources */,
 				4949AB0B282C3F5700A0765B /* Badge.swift in Sources */,
 				491A86242829FEA2003CCD6B /* EmployeeApiClient.swift in Sources */,
 				491A862E282B272F003CCD6B /* TableViewState.swift in Sources */,
+				4949AB1B282DEC7C00A0765B /* EmployeeListSortType.swift in Sources */,
 				491A861D2829C65F003CCD6B /* Employee.swift in Sources */,
 				4949AB09282C344400A0765B /* UseAutoLayout.swift in Sources */,
 				49483FC728298E0B000B7C87 /* AppDelegate.swift in Sources */,
@@ -690,6 +722,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4949AB0E282C6AE800A0765B /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/AlamofireImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4949AB0F282C6AE800A0765B /* AlamofireImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4949AB0E282C6AE800A0765B /* XCRemoteSwiftPackageReference "AlamofireImage" */;
+			productName = AlamofireImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 49483FBB28298E0B000B7C87 /* Project object */;
 }

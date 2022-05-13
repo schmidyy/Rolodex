@@ -6,8 +6,9 @@
 //
 
 import Foundation
+//import SwiftUI
 import UIKit
-import SwiftUI
+import AlamofireImage
 
 class EmployeeCell: UITableViewCell {
 	private static var placeholderAvatar: UIImage? = {
@@ -70,6 +71,8 @@ class EmployeeCell: UITableViewCell {
 		
 		contentView.addSubview(mainStackView)
 		NSLayoutConstraint.activate([
+			avatarView.widthAnchor.constraint(equalToConstant: 42),
+			avatarView.heightAnchor.constraint(equalToConstant: 42),
 			mainStackView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
 			mainStackView.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
 			mainStackView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
@@ -82,35 +85,15 @@ class EmployeeCell: UITableViewCell {
 	}
 	
 	func configure(with employee: Employee) {
-		avatarView.image = Self.placeholderAvatar
+		avatarView.af.setImage(
+			withURL: employee.photoUrlSmall,
+			cacheKey: employee.uuid,
+			placeholderImage: Self.placeholderAvatar,
+			filter: CircleFilter()
+		)
+		
 		nameLabel.text = employee.fullName
-		teamBadge.configure(with: employee.team, color: employee.team.badgeColor)
+		teamBadge.configure(with: employee.team.rawValue, color: employee.team.badgeColor)
 		bioLabel.text = employee.biography
-	}
-}
-
-fileprivate extension String {
-	/// Tries to provide a consistent color for each team.
-	/// Choses a random color otherwise.
-	var badgeColor: UIColor {
-		// SwiftUI colors are a bit nicer :)
-		let allColors = [Color.red, .orange, .yellow, .green, .blue, .indigo, .cyan, .purple, .pink, .mint, .teal]
-		let color: Color
-		
-		switch self {
-		case "Point of Sale": color = .red
-		case "Public Web & Marketing": color = .orange
-		case "Retail": color = .yellow
-		case "Restaurants": color = .green
-		case "Cash": color = .teal
-		case "Appointments": color = .teal
-		case "Invoices": color = .blue
-		case "Point of Sale Platform": color = .indigo
-		case "Hardware": color = .purple
-		case "Core": color = .pink
-		default: color = allColors.randomElement()!
-		}
-		
-		return UIColor(color)
 	}
 }

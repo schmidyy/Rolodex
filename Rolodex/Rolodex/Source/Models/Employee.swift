@@ -40,7 +40,7 @@ struct Employee: Decodable, Equatable {
 	let photoUrlLarge: URL
 	
 	/// The team they are on, represented as a human readable string.
-	let team: String
+	let team: Team
 	
 	/// How the employee is classified.
 	let employeeType: EmployeeType

@@ -7,8 +7,11 @@
 
 import Foundation
 
+typealias TableViewStateData = Decodable & Equatable
+typealias TableViewStateError = Error & Equatable
+
 /// Maintains the current state of a table view between loading, loaded, and error states.
-enum TableViewState<T: Decodable & Equatable, E: Error & Equatable>: Equatable {
+enum TableViewState<T: TableViewStateData, E: TableViewStateError>: Equatable {
 	case loading
 	case loaded([T])
 	case error(E)

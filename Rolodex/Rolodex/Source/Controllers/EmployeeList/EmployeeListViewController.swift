@@ -9,7 +9,7 @@ import UIKit
 
 class EmployeeListViewController: UITableViewController {
 	// MARK: Properties
-	typealias State = TableViewState<Employee, EmployeeApiClient.RequestError>
+	private typealias State = TableViewState<Employee, EmployeeApiClient.RequestError>
 	
 	private var state: State = .loading {
 		didSet {
@@ -21,7 +21,16 @@ class EmployeeListViewController: UITableViewController {
 		}
 	}
 	
-	private var endpoint: EmployeeApiClient.Endpoint = .production
+	private var sortType: EmployeeListSortType = .teamAtoZ {
+		didSet {
+			render()
+		}
+	}
+	
+	private let endpoint: EmployeeApiClient.Endpoint
+	
+	private lazy var refresh = UIRefreshControl()
+	private var emptyState: EmptyStateView?
 	
 	private lazy var loadingIndicator: UIActivityIndicatorView = {
 		let hud = UIActivityIndicatorView()
@@ -32,18 +41,27 @@ class EmployeeListViewController: UITableViewController {
 		return hud
 	}()
 	
-	private lazy var refresh = UIRefreshControl()
-	private var emptyState: EmptyStateView?
-	
 	// MARK: Lifecycle
+	init(endpoint: EmployeeApiClient.Endpoint = .production) {
+		self.endpoint = endpoint
+		super.init(style: .plain)
+	}
+	
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		title = "Rolodex"
-		navigationController?.navigationBar.prefersLargeTitles = true
+		
+		navigationItem.leftBarButtonItem = UIBarButtonItem(
+			image: UIImage(systemName: "arrow.up.arrow.down"),
+			menu: UIMenu(options: .singleSelection, children: menuActions)
+		)
 		
 		tableView.register(EmployeeCell.self, forCellReuseIdentifier: "employee.cell")
-		
 		render()
 	}
 	
@@ -66,15 +84,17 @@ class EmployeeListViewController: UITableViewController {
 	
 	private func loadEmployeeList() {
 		EmployeeApiClient.fetch(endpoint: endpoint) { [weak self, weak refresh] result in
+			guard let self = self else { return }
+			
 			DispatchQueue.main.async {
 				refresh?.endRefreshing()
 			}
 			
 			switch result {
 			case .success(let root):
-				self?.state = .loaded(root.employees)
+				self.state = .loaded(root.employees)
 			case .failure(let error):
-				self?.state = .error(error)
+				self.state = .error(error)
 			}
 		}
 	}
@@ -153,12 +173,31 @@ extension EmployeeListViewController {
 			return UITableViewCell()
 		}
 		
-		let employee = state.data[indexPath.row]
+		let employee = sortType.sort(employees: state.data)[indexPath.row]
 		cell.configure(with: employee)
 		return cell
 	}
 
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
+	}
+}
+
+extension EmployeeListViewController {
+	var menuActions: [UIAction] {
+		let nameAtoZAction = UIAction(title: "Employee name (A-Z)") { [weak self] action in
+			self?.sortType = .nameAtoZ
+		}
+		let nameZtoAAction = UIAction(title: "Employee name (Z-A)") { [weak self] action in
+			self?.sortType = .nameZtoA
+		}
+		let teamAtoZAction = UIAction(title: "Team name (A-Z)", state: .on) { [weak self] action in
+			self?.sortType = .teamAtoZ
+		}
+		let teamZtoAAction = UIAction(title: "Team name (Z-A)") { [weak self] action in
+			self?.sortType = .teamZtoA
+		}
+		
+		return [nameAtoZAction, nameZtoAAction, teamAtoZAction, teamZtoAAction]
 	}
 }
